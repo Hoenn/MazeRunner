@@ -20,7 +20,7 @@ public class Level extends BasicGameState
 	private int aniSpeed[]={100, 100};
 	private Rectangle hurtBox;
 	private Rectangle colliBox;
-	private Line aimLine;
+	private Rectangle aimAssist;
 	private int score;
 	private ArrayList<Wall> wallList;
 	private int basicWallWidth;
@@ -45,8 +45,9 @@ public class Level extends BasicGameState
 		playerY= gc.getHeight()/2 -playerAni.getHeight();
 		playerHalfHeight=playerAni.getHeight()/2;
 		playerHalfWidth=playerAni.getWidth()/2;
-		hurtBox = new Rectangle((playerX+playerHalfWidth), (playerY+playerHalfHeight), 25f, 25f);
-		colliBox = new Rectangle((playerX + playerHalfWidth), (playerY + playerHalfHeight), 30F, 1000F);
+		hurtBox = new Rectangle((playerX+playerHalfWidth)-12f, (playerY+playerHalfHeight), 24f, 24f);
+		colliBox = new Rectangle((playerX + playerHalfWidth)-15f, (playerY + playerHalfHeight), 30F, 1000F);
+		aimAssist= new Rectangle((playerX+ gc.getWidth()/4), playerY+playerHalfHeight, 2, 2);
 		lose=false;
 		wallList = new ArrayList<Wall>();
 		wallTimer=0l;
@@ -137,6 +138,7 @@ public class Level extends BasicGameState
 		}
 		g.drawAnimation(playerAni, playerX, playerY);//playerAni.draw(playerX, playerY);
 		g.setColor(Color.white);
+		g.fill(aimAssist);
 		g.drawString(Integer.toString(score), Tools.centerTextX(Integer.toString(score), 375), 62f);
 
 		if(Game.debug)
@@ -214,10 +216,9 @@ public class Level extends BasicGameState
 	}
 	public void updateBoxes()
 	{
-		hurtBox.setX((float)(playerX + playerAni.getWidth() / 2) - hurtBox.getWidth() / 2.0F); 
 		hurtBox.setY((float)(playerY + playerAni.getHeight() / 2) - hurtBox.getHeight() / 2.0F); 
-		colliBox.setX((float)(playerX + playerAni.getWidth() / 2) - colliBox.getWidth() / 2.0F); 
 		colliBox.setY((float)(playerY + playerAni.getHeight() / 2) - colliBox.getHeight() / 2.0F);
+		aimAssist.setY(playerY + playerAni.getHeight() / 2);
 	}
 	public void addScore()
 	{
