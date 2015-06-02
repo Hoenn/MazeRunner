@@ -25,11 +25,12 @@ public class Level extends BasicGameState
 	private int basicWallSpacer;
 	private long wallTimer;
 	private float wallSpawnTime;
-	private float wallMoveSpeed;
 	private boolean gameStart;
 	private boolean lose;
 	private boolean mButtonLeft;
 	private boolean mButtonRight;
+	private float mazeSpeedTime=0;
+	private boolean mazeSpeedUp;
 	
 	public Level(int stateID)
 	{
@@ -47,36 +48,55 @@ public class Level extends BasicGameState
 		gameStart=false;
 		lose=false;
 		wallList = new ArrayList<Wall>();
-		basicWallSpacer = 70;
-		basicWallWidth=20;
 		wallTimer=0l;
-		wallMoveSpeed=0.35f;
-		wallSpawnTime=1000f;
+		Wall.moveSpeed=0.35f;
+		mazeSpeedUp=false;
 
 	}
 	public void resetArcade()
 	{
 		wallSpawnTime=1500f;
-		wallMoveSpeed=0.5f;
+		Wall.moveSpeed=0.5f;
+		basicWallSpacer=100;
+		basicWallWidth=20;
+
+
 	}
 	public void resetZen()
 	{
-		wallMoveSpeed=1.0f;
+		Wall.moveSpeed=1.0f;
 		wallSpawnTime=700f;
+		basicWallSpacer=90;
+		basicWallWidth=30;
+
+
 	}
 	public void resetMaze()
 	{
-		wallSpawnTime=4000f;
+		basicWallSpacer=70;
+		wallSpawnTime=97f;
 		basicWallWidth=50;
 		hurtBox.setSize(20f, 20f);
-		wallMoveSpeed=0.025f;
+		Wall.moveSpeed=1.025f;
+		mazeSpeedUp=true;
+	}
+	public void mazeStartSpeedUp(int delta)
+	{
+		mazeSpeedTime+=delta;
+		if(mazeSpeedTime>700L)
+		{
+			wallSpawnTime=2200f;
+			Wall.moveSpeed=0.045f;
+			mazeSpeedTime=0L;
+			mazeSpeedUp=false;
+		}
 	}
 	public void speedUp()
 	{
-		if(score%5 ==0 && wallMoveSpeed <1.0f)
+		if(score%5 ==0 && Wall.moveSpeed <1.0f)
 		{
-			wallMoveSpeed *= 1.100000001D;
-			wallSpawnTime/= 1.10000001D;
+			Wall.moveSpeed *= 1.05;
+			wallSpawnTime/= 1.05;
 		}
 		if(score%10 ==0 && basicWallSpacer>40)
 		{
@@ -89,7 +109,6 @@ public class Level extends BasicGameState
 		wallList.clear();
 		gameStart=false;
 		lose=false;
-		basicWallSpacer=70;
 		switch(Game.gameType)
 		{
 			case 1: resetArcade();
@@ -133,6 +152,11 @@ public class Level extends BasicGameState
 	}
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException
 	{
+		if(mazeSpeedUp)
+		{
+			mazeStartSpeedUp(delta);
+		}
+		
 		if(wallTimer>20000L)
 		{
 			wallTimer=0;
@@ -146,7 +170,7 @@ public class Level extends BasicGameState
 		for(int i=0; i<wallList.size();i++)
 		{
 			Wall w = wallList.get(i);
-			w.wallUpdate(wallMoveSpeed, delta);
+			w.wallUpdate(delta);
 			if(w.getTop().intersects(colliBox)||w.getBottom().intersects(colliBox))
 			{
 				if(w.getTop().intersects(hurtBox)||w.getBottom().intersects(hurtBox))
