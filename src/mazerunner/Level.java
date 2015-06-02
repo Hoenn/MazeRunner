@@ -1,9 +1,10 @@
 package mazerunner;
 
 import java.util.ArrayList;
-
 import java.util.Iterator;
+
 import org.newdawn.slick.*;
+import org.newdawn.slick.geom.Line;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -13,12 +14,13 @@ public class Level extends BasicGameState
 	private int id;
 	private int playerX;
 	private int playerY;
-	private int playerHalfHeight;
+	private int playerHalfHeight, playerHalfWidth;
 	private Animation playerAni;
 	private Image playerAniSet[];
 	private int aniSpeed[]={100, 100};
 	private Rectangle hurtBox;
 	private Rectangle colliBox;
+	private Line aimLine;
 	private int score;
 	private ArrayList<Wall> wallList;
 	private int basicWallWidth;
@@ -42,8 +44,9 @@ public class Level extends BasicGameState
 		playerX= gc.getWidth()/8;
 		playerY= gc.getHeight()/2 -playerAni.getHeight();
 		playerHalfHeight=playerAni.getHeight()/2;
-		hurtBox = new Rectangle((playerX+playerAni.getWidth())/2, (playerY+playerAni.getHeight())/2, 25f, 25f);
-		colliBox = new Rectangle((playerX + playerAni.getWidth()) / 2, (playerY + playerAni.getHeight()) / 2, 30F, 1000F);
+		playerHalfWidth=playerAni.getWidth()/2;
+		hurtBox = new Rectangle((playerX+playerHalfWidth), (playerY+playerHalfHeight), 25f, 25f);
+		colliBox = new Rectangle((playerX + playerHalfWidth), (playerY + playerHalfHeight), 30F, 1000F);
 		lose=false;
 		wallList = new ArrayList<Wall>();
 		wallTimer=0l;
