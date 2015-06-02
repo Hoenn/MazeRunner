@@ -21,9 +21,9 @@ public class Game extends StateBasedGame
 	public Game(String name)
 	{
 		super(name);
-		addState(new StartScreen(0));
-		addState(new GameOver(1));
-		addState(new Level(2));
+		addState(new StartScreen(States.STARTSCREEN));
+		addState(new Level(States.LEVEL));
+		addState(new GameOver(States.GAMEOVER));
 	}
 	public static void main(String[] args)
 	{
@@ -54,10 +54,10 @@ public class Game extends StateBasedGame
 		gc.setUpdateOnlyWhenVisible(false);
 		new Resources();
 		debug=false;
-		getState(0).init(gc, this);
-		getState(1).init(gc,  this);
-		getState(2).init(gc,  this);
-		enterState(0);
+		getState(States.STARTSCREEN).init(gc, this);
+		getState(States.LEVEL).init(gc, this);
+		getState(States.GAMEOVER).init(gc, this);
+		enterState(States.STARTSCREEN);
 		input = gc.getInput();
 		
 		

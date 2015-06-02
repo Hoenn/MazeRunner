@@ -51,7 +51,8 @@ public class StartScreen extends BasicGameState
 			else if(playerChoice.intersects(zen)) 
 				Game.gameType = 2; 
 			else if(playerChoice.intersects(maze)) 
-				Game.gameType = 3; sbg.enterState(2); 
+				Game.gameType = 3; 
+			sbg.enterState(States.LEVEL); 
 		} 
 		if(Game.input.isMousePressed(2)) 
 			Game.debug = !Game.debug; 

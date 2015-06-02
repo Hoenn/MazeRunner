@@ -180,12 +180,12 @@ public class Level extends BasicGameState
 		}
 		if(gameStart&&lose)
 		{
-			sbg.enterState(1);;
+			sbg.enterState(States.GAMEOVER);;
 			gc.setMouseGrabbed(false);
 		}
 		if(Game.input.isKeyPressed(1))
 		{
-			sbg.enterState(0);
+			sbg.enterState(States.STARTSCREEN);
 			gc.setMouseGrabbed(false);
 		}
 	}

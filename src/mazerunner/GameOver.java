@@ -55,11 +55,11 @@ public class GameOver extends BasicGameState
 			playerChoice = new Rectangle(Game.input.getMouseX(), Game.input.getMouseY(), 1.0f, 1.0f);
 			if(playerChoice.intersects(choiceYes))
 			{
-				sbg.enterState(2);
+				sbg.enterState(States.LEVEL);
 			}
 			else if(playerChoice.intersects(choiceNo))
 			{
-				sbg.enterState(0);
+				sbg.enterState(States.STARTSCREEN);
 			}
 		}
 	}
