@@ -2,10 +2,7 @@ package mazerunner;
 
 import java.util.ArrayList;
 
-import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.Iterator;
-import mazerunner.*;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;

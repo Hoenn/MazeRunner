@@ -6,7 +6,6 @@ import mazerunner.Level;
 import mazerunner.StartScreen; 
 
 import org.newdawn.slick.*;
-import org.newdawn.slick.state.GameState; 
 import org.newdawn.slick.state.StateBasedGame;
 
 public class Game extends StateBasedGame
