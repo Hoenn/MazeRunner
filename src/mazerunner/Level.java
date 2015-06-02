@@ -13,6 +13,7 @@ public class Level extends BasicGameState
 	private int id;
 	private int playerX;
 	private int playerY;
+	private int playerHalfHeight;
 	private Animation playerAni;
 	private Image playerAniSet[];
 	private int aniSpeed[]={100, 100};
@@ -40,6 +41,7 @@ public class Level extends BasicGameState
 		playerAni = new Animation(playerAniSet, aniSpeed);
 		playerX= gc.getWidth()/8;
 		playerY= gc.getHeight()/2 -playerAni.getHeight();
+		playerHalfHeight=playerAni.getHeight()/2;
 		hurtBox = new Rectangle((playerX+playerAni.getWidth())/2, (playerY+playerAni.getHeight())/2, 25f, 25f);
 		colliBox = new Rectangle((playerX + playerAni.getWidth()) / 2, (playerY + playerAni.getHeight()) / 2, 30F, 1000F);
 		gameStart=false;
@@ -168,7 +170,7 @@ public class Level extends BasicGameState
 		{
 			if(!gameStart)
 				gameStart=true;
-			playerY=Game.input.getMouseY()-playerAni.getHeight()/2;
+			updatePlayerPos();
 			updateBoxes();
 		}
 		else if(!mButtonLeft || !mButtonRight && !Game.debug && gameStart)
@@ -185,6 +187,10 @@ public class Level extends BasicGameState
 			sbg.enterState(States.STARTSCREEN);
 			gc.setMouseGrabbed(false);
 		}
+	}
+	public void updatePlayerPos()
+	{
+		playerY=Game.input.getMouseY()-playerHalfHeight;
 	}
 	public void updateBoxes()
 	{

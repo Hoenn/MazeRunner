@@ -59,8 +59,5 @@ public class Game extends StateBasedGame
 		enterState(States.STARTSCREEN);
 		input = gc.getInput();
 		
-		
-		
 	}	
-	
 }
