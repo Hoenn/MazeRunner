@@ -16,6 +16,7 @@ import javax.sound.midi.Sequencer;
 import javax.sound.midi.ShortMessage;
 import javax.sound.midi.Track;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
@@ -23,6 +24,7 @@ public class Resources
 {
 	private static Map<String, Image> images;
 	private static Map<String, Sound> sounds;
+	public static Map<String, Color> colors;
 	public Resources() throws SlickException
 	{
 		images = new HashMap<String, Image>();
@@ -68,7 +70,11 @@ public class Resources
 			e.printStackTrace();
 		}
 		sequencer.start();
-		
+		colors = new HashMap<String, Color>();
+		colors.put("myRed", new Color(217, 27, 12));
+		colors.put("myBlue", new Color(15, 57, 224));
+		colors.put("myGreen", new Color(15, 192, 42));
+
 		
 	}
 	public static Image loadImage(String path) throws SlickException

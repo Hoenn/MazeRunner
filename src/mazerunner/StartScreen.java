@@ -30,12 +30,14 @@ public class StartScreen extends BasicGameState
 	}
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException
 	{
-		g.setColor(Color.red);
+		g.setColor(Resources.colors.get("myRed"));
 		g.fill(arcade);
-		g.setColor(Color.blue);
+		g.setColor(Resources.colors.get("myBlue"));
 		g.fill(zen);
-		g.setColor(Color.green);
+		g.setColor(Resources.colors.get("myGreen"));
 		g.fill(maze);
+		g.setDrawMode(Graphics.MODE_NORMAL);
+
 		g.setColor(Color.black);
 		g.drawString("ARCADE", Tools.centerTextX("ARCADE",  125), 250F); 
 		g.drawString("ZEN", Tools.centerTextX("ZEN", 375), 250F); 

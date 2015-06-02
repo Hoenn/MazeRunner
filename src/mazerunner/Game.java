@@ -39,6 +39,7 @@ public class Game extends StateBasedGame
 		{
 			AppGameContainer appgc = new AppGameContainer(new Game("Maze Runner"));
 			appgc.setDisplayMode(750, 500, false);
+			appgc.supportsAlphaInBackBuffer();
 			appgc.start();
 		}
 		catch(SlickException e)
@@ -54,6 +55,7 @@ public class Game extends StateBasedGame
 		gc.setTargetFrameRate(60);
 		gc.setAlwaysRender(true);
 		gc.setVSync(true);
+		gc.getGraphics().setAntiAlias(true);
 		gc.setShowFPS(false);
 		gameFont=gc.getGraphics().getFont();
 		gc.setUpdateOnlyWhenVisible(false);

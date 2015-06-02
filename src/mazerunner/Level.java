@@ -47,7 +47,7 @@ public class Level extends BasicGameState
 		playerHalfWidth=playerAni.getWidth()/2;
 		hurtBox = new Rectangle((playerX+playerHalfWidth)-12f, (playerY+playerHalfHeight), 24f, 24f);
 		colliBox = new Rectangle((playerX + playerHalfWidth)-15f, (playerY + playerHalfHeight), 30F, 1000F);
-		aimAssist= new Rectangle((playerX+ gc.getWidth()/4), playerY+playerHalfHeight, 2, 2);
+		aimAssist= new Rectangle((playerX+ gc.getWidth()/3), playerY+playerHalfHeight, 2, 2);
 		lose=false;
 		wallList = new ArrayList<Wall>();
 		wallTimer=0l;
