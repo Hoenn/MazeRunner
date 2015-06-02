@@ -5,6 +5,7 @@ import mazerunner.Tools;
 
 public class Wall
 {
+	public static float moveSpeed;
 	private Rectangle top;
 	private Rectangle bottom;
 	private int wallWidth;
@@ -19,14 +20,18 @@ public class Wall
 		top = new Rectangle(750f, 0.0f, wallWidth, heightGenerator);
 		bottom = new Rectangle(750f, top.getHeight()+(float)spacer, wallWidth, 500f-top.getHeight()-(float)spacer);
 	}
-	public void wallUpdate(float speed, int delta)
+	public void wallUpdate(int delta)
 	{
-		top.setX(top.getX()-speed*(float)delta);
-		bottom.setX(bottom.getX()-speed*(float)delta);
+		top.setX(top.getX()-moveSpeed*(float)delta);
+		bottom.setX(bottom.getX()-moveSpeed*(float)delta);
 		if(top.getX()<=(float)(-wallWidth))
 		{
 			removable=true;
 		}
+	}
+	public static void setMoveSpeed(float speed)
+	{
+		moveSpeed=speed;
 	}
 	public void passed()
 	{
