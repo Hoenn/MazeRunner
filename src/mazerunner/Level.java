@@ -25,7 +25,6 @@ public class Level extends BasicGameState
 	private int basicWallSpacer;
 	private long wallTimer;
 	private float wallSpawnTime;
-	private boolean gameStart;
 	private boolean lose;
 	private boolean mButtonLeft;
 	private boolean mButtonRight;
@@ -45,11 +44,9 @@ public class Level extends BasicGameState
 		playerHalfHeight=playerAni.getHeight()/2;
 		hurtBox = new Rectangle((playerX+playerAni.getWidth())/2, (playerY+playerAni.getHeight())/2, 25f, 25f);
 		colliBox = new Rectangle((playerX + playerAni.getWidth()) / 2, (playerY + playerAni.getHeight()) / 2, 30F, 1000F);
-		gameStart=false;
 		lose=false;
 		wallList = new ArrayList<Wall>();
 		wallTimer=0l;
-		Wall.moveSpeed=0.35f;
 		mazeSpeedUp=false;
 
 	}
@@ -59,17 +56,13 @@ public class Level extends BasicGameState
 		Wall.moveSpeed=0.5f;
 		basicWallSpacer=100;
 		basicWallWidth=20;
-
-
 	}
 	public void resetZen()
 	{
 		Wall.moveSpeed=1.0f;
 		wallSpawnTime=700f;
 		basicWallSpacer=90;
-		basicWallWidth=30;
-
-
+		basicWallWidth=20;
 	}
 	public void resetMaze()
 	{
@@ -83,7 +76,7 @@ public class Level extends BasicGameState
 	public void mazeStartSpeedUp(int delta)
 	{
 		mazeSpeedTime+=delta;
-		if(mazeSpeedTime>700L)
+		if(mazeSpeedTime>600L)
 		{
 			wallSpawnTime=2200f;
 			Wall.moveSpeed=0.045f;
@@ -107,7 +100,8 @@ public class Level extends BasicGameState
 	{
 		score=0;
 		wallList.clear();
-		gameStart=false;
+		mazeSpeedTime=0;
+		wallTimer=0;
 		lose=false;
 		switch(Game.gameType)
 		{
@@ -192,16 +186,15 @@ public class Level extends BasicGameState
 		mButtonRight=Game.input.isMouseButtonDown(1);
 		if(mButtonLeft || mButtonRight)
 		{
-			if(!gameStart)
-				gameStart=true;
+
 			updatePlayerPos();
 			updateBoxes();
 		}
-		else if(!mButtonLeft || !mButtonRight && !Game.debug && gameStart)
+		else if(!Game.debug  )
 		{
 			lose=true;
 		}
-		if(gameStart&&lose)
+		if(lose)
 		{
 			sbg.enterState(States.GAMEOVER);;
 			gc.setMouseGrabbed(false);
