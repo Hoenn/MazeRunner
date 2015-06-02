@@ -1,5 +1,9 @@
 package mazerunner;
 import java.io.File; 
+import java.io.IOException;
+
+import javax.sound.midi.InvalidMidiDataException;
+import javax.sound.midi.MidiUnavailableException;
 
 import mazerunner.GameOver; 
 import mazerunner.Level; 
@@ -44,6 +48,8 @@ public class Game extends StateBasedGame
 	}
 	public void initStatesList(GameContainer gc) throws SlickException
 	{
+		new Resources();
+
 		gc.setMaximumLogicUpdateInterval(60);
 		gc.setTargetFrameRate(60);
 		gc.setAlwaysRender(true);
@@ -51,13 +57,13 @@ public class Game extends StateBasedGame
 		gc.setShowFPS(false);
 		gameFont=gc.getGraphics().getFont();
 		gc.setUpdateOnlyWhenVisible(false);
-		new Resources();
 		debug=false;
 		getState(States.STARTSCREEN).init(gc, this);
 		getState(States.LEVEL).init(gc, this);
 		getState(States.GAMEOVER).init(gc, this);
 		enterState(States.STARTSCREEN);
 		input = gc.getInput();
+
 		
 	}	
 }
