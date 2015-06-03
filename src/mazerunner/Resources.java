@@ -5,17 +5,20 @@ import java.util.Map;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 public class Resources
 {
 	private static Map<String, Image> images;
 	private static Map<String, Sound> sounds;
+	private static Map<String, Music> music;
 	public static Map<String, Color> colors;
 	public Resources() throws SlickException
 	{
 		images = new HashMap<String, Image>();
 		sounds = new HashMap<String, Sound>();
+		music  = new HashMap<String, Music>();
 		images.put("player1", loadImage("res/playerAni_1.png"));
 		images.put("player2", loadImage("res/playerAni_2.png"));
 		images.put("wallbg", loadImage("res/swordWall.png"));
@@ -23,6 +26,10 @@ public class Resources
 		sounds.put("spawnArcade", loadSound("res/spawn.wav"));
 		sounds.put("spawnZen", loadSound("res/spawnZen.wav"));
 		sounds.put("spawnMaze", loadSound("res/spawnMaze.wav"));
+		music.put("titleScreen", loadMusic("res/titleScreen.ogg"));
+		music.put("arcade", loadMusic("res/arcadeMode.ogg"));
+		music.put("zen", loadMusic("res/zenMode.ogg"));
+		music.put("maze", loadMusic("res/mazeMode.ogg"));
 
 		colors = new HashMap<String, Color>();
 		colors.put("myRed", new Color(217, 27, 12));
@@ -46,5 +53,13 @@ public class Resources
 	public static Sound getSound(String name)
 	{
 		return (Sound)sounds.get(name);
+	}
+	public static Music loadMusic(String path) throws SlickException
+	{
+		return new Music(path);
+	}
+	public static Music getMusic(String name)
+	{
+		return (Music)music.get(name);
 	}
 }

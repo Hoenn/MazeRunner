@@ -29,6 +29,10 @@ public class StartScreen extends BasicGameState
 		zen = new Rectangle(250f, 0.0f, 250f, 500f);
 		maze= new Rectangle(500f, 0.0f, 250f, 500f);
 	}
+	public void enter(GameContainer gc, StateBasedGame sbg)
+	{
+		Resources.getMusic("titleScreen").loop();
+	}
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException
 	{
 		g.setColor(Resources.colors.get("myRed"));

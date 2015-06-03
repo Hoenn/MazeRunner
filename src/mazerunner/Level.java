@@ -69,6 +69,7 @@ public class Level extends BasicGameState
 		basicWallSpacer=68;
 		basicWallWidth=50;
 		Resources.getSound("spawnArcade").play();
+		Resources.getMusic("arcade").loop();
 	}
 	public void resetZen()
 	{
@@ -77,6 +78,8 @@ public class Level extends BasicGameState
 		basicWallSpacer=90;
 		basicWallWidth=50;
 		Resources.getSound("spawnZen").play();
+		Resources.getMusic("zen").loop();
+
 	}
 	public void resetMaze()
 	{
@@ -87,6 +90,8 @@ public class Level extends BasicGameState
 		Wall.moveSpeed=1.025f;
 		mazeSpeedUp=true;
 		Resources.getSound("spawnMaze").play();
+		Resources.getMusic("maze").loop();
+
 	}
 	public void mazeStartSpeedUp(int delta)
 	{
