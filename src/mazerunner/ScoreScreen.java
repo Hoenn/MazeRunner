@@ -61,6 +61,8 @@ public class ScoreScreen extends BasicGameState
 	{
 		g.setColor(new Color(0, 0, 0, 0.8f));
 		g.setFont(trueTypeFont);
+		g.setColor(Color.white);
+ 
 		if(currentPage==0)
 		{
 			g.drawString("HighScores: Arcade", gc.getWidth() / 2.7f, 50);

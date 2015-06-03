@@ -15,7 +15,7 @@ public class Score  implements Serializable
     {
         return score;
     }
-
+    
     public String getName() 
     {
         return name;
