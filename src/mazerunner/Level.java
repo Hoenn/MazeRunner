@@ -210,7 +210,15 @@ public class Level extends BasicGameState
 					if(!Game.debug)
 					{
 						Resources.getSound("hit").play();
-						Game.hsm.addScore("You", score);
+						switch(Game.gameType)
+						{
+							case 1:	Game.hsm.addArcadeScore("Hoenn", score);
+									break;
+							case 2: Game.hsm.addZenScore("Hoenn", score);
+									break;
+							case 3: Game.hsm.addMazeScore("Hoenn", score);
+									break;
+						}
 						lose=true;
 					}
 				}

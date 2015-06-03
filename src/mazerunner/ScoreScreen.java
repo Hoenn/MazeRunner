@@ -22,8 +22,14 @@ public class ScoreScreen extends BasicGameState
 	private Font font;
 	private TrueTypeFont trueTypeFont;
 	
-	private String highScores;
-	private String dates;
+	private String highScores_Arcade;
+	private String dates_Arcade;
+	private String highScores_Zen;
+	private String dates_Zen;
+	private String highScores_Maze;
+	private String dates_Maze;
+	
+	private int currentPage;
 	
 	public ScoreScreen(int state)
 	{
@@ -40,8 +46,14 @@ public class ScoreScreen extends BasicGameState
 
 	public void enter(GameContainer gc, StateBasedGame sbg) throws SlickException
 	{
-		highScores = Game.hsm.getHighscoreString();
-        dates = Game.hsm.getDateString();
+		currentPage=0;
+		
+		highScores_Arcade = Game.hsm.getHighscoreString_Arcade();
+        dates_Arcade = Game.hsm.getDateString_Arcade();
+        highScores_Zen = Game.hsm.getHighscoreString_Zen();
+        dates_Zen = Game.hsm.getDateString_Zen();
+        highScores_Maze = Game.hsm.getHighscoreString_Maze();
+        dates_Maze = Game.hsm.getDateString_Maze();
 	}
 
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
@@ -49,14 +61,36 @@ public class ScoreScreen extends BasicGameState
 	{
 		g.setColor(new Color(0, 0, 0, 0.8f));
 		g.setFont(trueTypeFont);
-		g.drawString("HighScores", gc.getWidth() / 2.7f, 50);
-		g.resetFont();
-		g.setColor(new Color(0, 0, 0, 0.5f));
-		g.fillRect(gc.getWidth() / 4.1f, gc.getHeight() / 4.2f, 400, 220);
-		g.setColor(Color.white);
-		g.drawString(highScores, gc.getWidth() / 3.9f, gc.getHeight() / 4f);
-		g.drawString(dates, gc.getWidth() /  1.9f, gc.getHeight() / 4f);
-		
+		if(currentPage==0)
+		{
+			g.drawString("HighScores: Arcade", gc.getWidth() / 2.7f, 50);
+			g.resetFont();
+			g.setColor(new Color(0, 0, 0, 0.5f));
+			g.fillRect(gc.getWidth() / 4.1f, gc.getHeight() / 4.2f, 400, 220);
+			g.setColor(Color.white);
+			g.drawString(highScores_Arcade, gc.getWidth() / 3.9f, gc.getHeight() / 4f);
+			g.drawString(dates_Arcade, gc.getWidth() /  1.9f, gc.getHeight() / 4f);
+		}
+		else if(currentPage==1)
+		{
+			g.drawString("HighScores: Zen", gc.getWidth() / 2.7f, 50);
+			g.resetFont();
+			g.setColor(new Color(0, 0, 0, 0.5f));
+			g.fillRect(gc.getWidth() / 4.1f, gc.getHeight() / 4.2f, 400, 220);
+			g.setColor(Color.white);
+			g.drawString(highScores_Zen, gc.getWidth() / 3.9f, gc.getHeight() / 4f);
+			g.drawString(dates_Zen, gc.getWidth() /  1.9f, gc.getHeight() / 4f);
+		}
+		else if(currentPage==2)
+		{
+			g.drawString("HighScores: Maze", gc.getWidth() / 2.7f, 50);
+			g.resetFont();
+			g.setColor(new Color(0, 0, 0, 0.5f));
+			g.fillRect(gc.getWidth() / 4.1f, gc.getHeight() / 4.2f, 400, 220);
+			g.setColor(Color.white);
+			g.drawString(highScores_Maze, gc.getWidth() / 3.9f, gc.getHeight() / 4f);
+			g.drawString(dates_Maze, gc.getWidth() /  1.9f, gc.getHeight() / 4f);
+		}
 	}
 
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
@@ -67,6 +101,24 @@ public class ScoreScreen extends BasicGameState
 		{
 
 			sbg.enterState(0, new FadeOutTransition(Color.black, 1500), null);
+		}
+		if(Game.input.isKeyPressed(Input.KEY_LEFT))
+		{
+			if(currentPage==0)
+			{
+				currentPage=2;
+			}
+			else
+				currentPage--;
+		}
+		if(Game.input.isKeyPressed(Input.KEY_RIGHT))
+		{
+			if(currentPage==2)
+			{
+				currentPage=0;
+			}
+			else 
+				currentPage++;
 		}
 
 	}
