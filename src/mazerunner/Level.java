@@ -66,7 +66,7 @@ public class Level extends BasicGameState
 	{
 		wallSpawnTime=1500f;
 		Wall.moveSpeed=0.5f;
-		basicWallSpacer=68;
+		basicWallSpacer=100;
 		basicWallWidth=50;
 		Resources.getSound("spawnArcade").play();
 		Resources.getMusic("arcade").loop();
@@ -83,7 +83,7 @@ public class Level extends BasicGameState
 	}
 	public void resetMaze()
 	{
-		basicWallSpacer=70;
+		basicWallSpacer=100;
 		wallSpawnTime=97f;
 		basicWallWidth=50;
 		hurtBox.setSize(20f, 20f);

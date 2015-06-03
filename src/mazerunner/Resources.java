@@ -22,10 +22,10 @@ public class Resources
 		images.put("player1", loadImage("res/playerAni_1.png"));
 		images.put("player2", loadImage("res/playerAni_2.png"));
 		images.put("wallbg", loadImage("res/swordWall.png"));
-		sounds.put("hit", loadSound("res/hit.wav"));
-		sounds.put("spawnArcade", loadSound("res/spawn.wav"));
-		sounds.put("spawnZen", loadSound("res/spawnZen.wav"));
-		sounds.put("spawnMaze", loadSound("res/spawnMaze.wav"));
+		sounds.put("hit", loadSound("res/hit.ogg"));
+		sounds.put("spawnArcade", loadSound("res/spawn.ogg"));
+		sounds.put("spawnZen", loadSound("res/spawnZen.ogg"));
+		sounds.put("spawnMaze", loadSound("res/spawnMaze.ogg"));
 		music.put("titleScreen", loadMusic("res/titleScreen.ogg"));
 		music.put("arcade", loadMusic("res/arcadeMode.ogg"));
 		music.put("zen", loadMusic("res/zenMode.ogg"));
