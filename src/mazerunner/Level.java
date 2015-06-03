@@ -58,15 +58,17 @@ public class Level extends BasicGameState
 	{
 		wallSpawnTime=1500f;
 		Wall.moveSpeed=0.5f;
-		basicWallSpacer=100;
-		basicWallWidth=20;
+		basicWallSpacer=68;
+		basicWallWidth=50;
+		Resources.getSound("spawnArcade").play();
 	}
 	public void resetZen()
 	{
 		Wall.moveSpeed=1.0f;
 		wallSpawnTime=700f;
 		basicWallSpacer=90;
-		basicWallWidth=20;
+		basicWallWidth=50;
+		Resources.getSound("spawnZen").play();
 	}
 	public void resetMaze()
 	{
@@ -76,6 +78,7 @@ public class Level extends BasicGameState
 		hurtBox.setSize(20f, 20f);
 		Wall.moveSpeed=1.025f;
 		mazeSpeedUp=true;
+		Resources.getSound("spawnMaze").play();
 	}
 	public void mazeStartSpeedUp(int delta)
 	{
@@ -129,12 +132,11 @@ public class Level extends BasicGameState
 	}
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException
 	{
-		g.setColor(Color.blue);
 		Wall w;
-		for(Iterator iterator = wallList.iterator(); iterator.hasNext();g.fill(w.getBottom()))
+		for(Iterator iterator = wallList.iterator(); iterator.hasNext();g.fillRect(w.getBottom().getX(), w.getBottom().getY(), w.getBottom().getWidth(), w.getBottom().getHeight(), Resources.getImage("wallbg"), 0, 0))
 		{
 			w = (Wall) iterator.next();
-			g.fill(w.getTop());
+			g.fillRect(w.getTop().getX(), w.getTop().getY(), w.getTop().getWidth(), w.getTop().getHeight(), Resources.getImage("wallbg"), 0, 0);
 		}
 		g.drawAnimation(playerAni, playerX, playerY);//playerAni.draw(playerX, playerY);
 		g.setColor(Color.white);
@@ -175,7 +177,10 @@ public class Level extends BasicGameState
 				if(w.getTop().intersects(hurtBox)||w.getBottom().intersects(hurtBox))
 				{
 					if(!Game.debug)
+					{
+						Resources.getSound("hit").play();
 						lose=true;
+					}
 				}
 				else if(!w.checkPassed())
 				{

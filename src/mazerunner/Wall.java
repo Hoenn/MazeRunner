@@ -1,6 +1,8 @@
 package mazerunner;
 
 import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.geom.Transform;
+
 import mazerunner.Tools;
 
 public class Wall
