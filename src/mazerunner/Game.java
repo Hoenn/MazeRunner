@@ -21,15 +21,19 @@ public class Game extends StateBasedGame
 	public static boolean debug;
 	public static int gameType;
 	public static Input input;
+	public static HighScoreManager hsm;
 	public Game(String name)
 	{
 		super(name);
 		addState(new StartScreen(States.STARTSCREEN));
 		addState(new Level(States.LEVEL));
 		addState(new GameOver(States.GAMEOVER));
+		addState(new ScoreScreen(States.SCORESCREEN));
 	}
 	public static void main(String[] args)
 	{
+		hsm= new HighScoreManager();
+
 		File f = new File("natives");
 		if(f.exists())
 		{
@@ -63,6 +67,7 @@ public class Game extends StateBasedGame
 		getState(States.STARTSCREEN).init(gc, this);
 		getState(States.LEVEL).init(gc, this);
 		getState(States.GAMEOVER).init(gc, this);
+		getState(States.SCORESCREEN).init(gc, this);
 		enterState(States.STARTSCREEN);
 		input = gc.getInput();
 

@@ -4,6 +4,7 @@ package mazerunner;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
@@ -60,6 +61,8 @@ public class StartScreen extends BasicGameState
 			Game.debug = !Game.debug; 
 		if(Game.input.isKeyPressed(1)) 
 			gc.exit();
+		if(Game.input.isKeyPressed(Input.KEY_S)) 
+			sbg.enterState(States.SCORESCREEN);
 	}
 	public int getID()
 	{

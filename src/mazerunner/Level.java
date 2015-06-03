@@ -205,6 +205,7 @@ public class Level extends BasicGameState
 					if(!Game.debug)
 					{
 						Resources.getSound("hit").play();
+						Game.hsm.addScore("You", score);
 						lose=true;
 					}
 				}
