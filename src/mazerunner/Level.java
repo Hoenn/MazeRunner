@@ -33,6 +33,10 @@ public class Level extends BasicGameState
 	private float mazeSpeedTime=0;
 	private boolean mazeSpeedUp;
 	
+	private Image[] backgrounds;
+	private int background1_x=0;
+	private int background2_x=500;
+	
 	public Level(int stateID)
 	{
 		id=stateID;
@@ -52,6 +56,10 @@ public class Level extends BasicGameState
 		wallList = new ArrayList<Wall>();
 		wallTimer=0l;
 		mazeSpeedUp=false;
+		backgrounds = new Image[2];
+		backgrounds[0] = new Image("res/background.png");
+		backgrounds[1] = new Image("res/background.png");
+
 
 	}
 	public void resetArcade()
@@ -105,6 +113,8 @@ public class Level extends BasicGameState
 	}
 	public void enter(GameContainer gc, StateBasedGame sbg)
 	{
+		background1_x=0;
+		background2_x=750;
 		score=0;
 		wallList.clear();
 		mazeSpeedTime=0;
@@ -132,6 +142,8 @@ public class Level extends BasicGameState
 	}
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException
 	{
+		backgrounds[0].draw(background1_x, 0);
+		backgrounds[1].draw(background2_x, 0);
 		Wall w;
 		for(Iterator iterator = wallList.iterator(); iterator.hasNext();g.fillRect(w.getBottom().getX(), w.getBottom().getY(), w.getBottom().getWidth(), w.getBottom().getHeight(), Resources.getImage("wallbg"), 0, 0))
 		{
@@ -153,6 +165,20 @@ public class Level extends BasicGameState
 	}
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException
 	{
+		if(background1_x>-750)
+		{
+			background1_x--;
+		}
+		else
+		{
+			background1_x=750;
+		}
+		if(background2_x>-750)
+		{
+			background2_x--;
+		}
+		else
+			background2_x=750;
 		if(mazeSpeedUp)
 		{
 			mazeStartSpeedUp(delta);
