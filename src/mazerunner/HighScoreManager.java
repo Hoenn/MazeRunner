@@ -39,7 +39,6 @@ public  class HighScoreManager
     public void addScore(String name, long score) 
     {
         loadScoreFile();
-        System.out.println(score);
         scores.add(new Score(name, score));
         updateScoreFile();
     }
