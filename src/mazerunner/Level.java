@@ -154,6 +154,7 @@ public class Level extends BasicGameState
 		{
 			w = (Wall) iterator.next();
 			g.fillRect(w.getTop().getX(), w.getTop().getY(), w.getTop().getWidth(), w.getTop().getHeight(), Resources.getImage("wallbg"), 0, 0);
+
 		}
 		g.drawAnimation(playerAni, playerX, playerY);//playerAni.draw(playerX, playerY);
 		g.setColor(Color.white);

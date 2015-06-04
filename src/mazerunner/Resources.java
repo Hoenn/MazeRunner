@@ -56,7 +56,7 @@ public class Resources
 	}
 	public static Music loadMusic(String path) throws SlickException
 	{
-		return new Music(path);
+		return new Music(path, true);
 	}
 	public static Music getMusic(String name)
 	{
