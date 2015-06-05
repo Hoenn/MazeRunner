@@ -252,8 +252,11 @@ public class Level extends BasicGameState
 		}
 		if(lose)
 		{
-			sbg.enterState(States.GAMEOVER, new FadeOutTransition(Color.black, 500), new FadeInTransition(Color.black, 500));
-			gc.setMouseGrabbed(false);
+			if(!mazeSpeedUp)
+			{
+				sbg.enterState(States.GAMEOVER, new FadeOutTransition(Color.black, 500), new FadeInTransition(Color.black, 500));
+				gc.setMouseGrabbed(false);
+			}
 		}
 		if(Game.input.isKeyPressed(1))
 		{
@@ -267,13 +270,15 @@ public class Level extends BasicGameState
 	}
 	public void updateBoxes()
 	{
-		hurtBox.setY((float)(playerY + playerAni.getHeight() / 2) - hurtBox.getHeight() / 2.0F); 
-		colliBox.setY((float)(playerY + playerAni.getHeight() / 2) - colliBox.getHeight() / 2.0F);
-		aimAssist.setY(playerY + playerAni.getHeight() / 2);
+		float height= playerY+playerAni.getHeight()/2;
+		hurtBox.setY(height - hurtBox.getHeight() / 2.0F); 
+		colliBox.setY(height- colliBox.getHeight() / 2.0F);
+		aimAssist.setY(height);
 	}
 	public void addScore()
 	{
 		score++;
+		Resources.getSound("scoreUp").play();
 		speedUp();
 	}
 	public int getID()

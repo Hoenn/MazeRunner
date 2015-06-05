@@ -30,7 +30,7 @@ public class Score  implements Serializable
     {
         score = s;
         name = n;
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 		Date date = new Date();
 		dateTime = dateFormat.format(date);
     }
