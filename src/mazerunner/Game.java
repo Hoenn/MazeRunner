@@ -26,6 +26,9 @@ public class Game extends StateBasedGame
 	public static int soundVolume;
 	public static Input input;
 	public static HighScoreManager hsm;
+	public static Color aimAssistColor;
+	public static float defaultSoundVol=.5f;
+	public static float defaultMusicVol=.1f;
 	public Game(String name)
 	{
 		super(name);
@@ -58,10 +61,11 @@ public class Game extends StateBasedGame
 	}
 	public void initStatesList(GameContainer gc) throws SlickException
 	{
-		new Resources();
-		gc.setMusicVolume(0.1f);
-		gc.setSoundVolume(0.5f);
+		aimAssistColor = new Color(255, 255, 255);
 
+		new Resources();
+		gc.setMusicVolume(Game.defaultMusicVol);
+		gc.setSoundVolume(Game.defaultSoundVol);
 		gc.setMaximumLogicUpdateInterval(60);
 		gc.setTargetFrameRate(60);
 		gc.setAlwaysRender(true);

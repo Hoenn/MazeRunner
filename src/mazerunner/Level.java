@@ -161,7 +161,7 @@ public class Level extends BasicGameState
 			g.fillRect(w.getBottom().getX(), w.getBottom().getY(), w.getBottom().getWidth(), w.getBottom().getHeight(), Resources.getImage("wallbg1"), 0, 0);
 		}
 		g.drawAnimation(playerAni, playerX, playerY);//playerAni.draw(playerX, playerY);
-		g.setColor(Color.magenta);
+		g.setColor(Game.aimAssistColor);
 		g.fill(aimAssist);
 		g.setColor(Color.white);
 		g.drawString(Integer.toString(score), Tools.centerTextX(Integer.toString(score), 375), 62f);

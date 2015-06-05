@@ -13,7 +13,7 @@ public class Resources
 	private static Map<String, Image> images;
 	private static Map<String, Sound> sounds;
 	private static Map<String, Music> music;
-	public static Map<String, Color> colors;
+	private static Map<String, Color> colors;
 	public Resources() throws SlickException
 	{
 		images = new HashMap<String, Image>();
@@ -63,5 +63,9 @@ public class Resources
 	public static Music getMusic(String name)
 	{
 		return (Music)music.get(name);
+	}
+	public static Color getColor(String name)
+	{
+		return (Color)colors.get(name);
 	}
 }
