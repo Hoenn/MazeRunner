@@ -21,7 +21,8 @@ public class Resources
 		music  = new HashMap<String, Music>();
 		images.put("player1", loadImage("res/playerAni_1.png"));
 		images.put("player2", loadImage("res/playerAni_2.png"));
-		images.put("wallbg", loadImage("res/swordWall.png"));
+		images.put("wallbg1", loadImage("res/swordWall.png"));
+		images.put("wallbg2", loadImage("res/swordWall2.png"));
 		sounds.put("hit", loadSound("res/hit.ogg"));
 		sounds.put("spawnArcade", loadSound("res/spawn.ogg"));
 		sounds.put("spawnZen", loadSound("res/spawnZen.ogg"));

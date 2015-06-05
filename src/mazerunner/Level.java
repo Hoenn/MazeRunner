@@ -8,6 +8,8 @@ import org.newdawn.slick.geom.Line;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 public class Level extends BasicGameState
 {
@@ -103,6 +105,7 @@ public class Level extends BasicGameState
 			mazeSpeedTime=0L;
 			mazeSpeedUp=false;
 		}
+
 	}
 	public void speedUp()
 	{
@@ -149,12 +152,13 @@ public class Level extends BasicGameState
 	{
 		backgrounds[0].draw(background1_x, 0);
 		backgrounds[1].draw(background2_x, 0);
-		Wall w;
-		for(Iterator iterator = wallList.iterator(); iterator.hasNext();g.fillRect(w.getBottom().getX(), w.getBottom().getY(), w.getBottom().getWidth(), w.getBottom().getHeight(), Resources.getImage("wallbg"), 0, 0))
-		{
-			w = (Wall) iterator.next();
-			g.fillRect(w.getTop().getX(), w.getTop().getY(), w.getTop().getWidth(), w.getTop().getHeight(), Resources.getImage("wallbg"), 0, 0);
 
+		for(Wall w: wallList)
+		{
+			g.rotate(w.getTop().getCenterX(), w.getTop().getCenterY(), 180);
+			g.fillRect(w.getTop().getX(), w.getTop().getY(), w.getTop().getWidth(), w.getTop().getHeight(), Resources.getImage("wallbg2"), 0, 0);
+			g.resetTransform();
+			g.fillRect(w.getBottom().getX(), w.getBottom().getY(), w.getBottom().getWidth(), w.getBottom().getHeight(), Resources.getImage("wallbg1"), 0, 0);
 		}
 		g.drawAnimation(playerAni, playerX, playerY);//playerAni.draw(playerX, playerY);
 		g.setColor(Color.magenta);
@@ -248,12 +252,12 @@ public class Level extends BasicGameState
 		}
 		if(lose)
 		{
-			sbg.enterState(States.GAMEOVER);;
+			sbg.enterState(States.GAMEOVER, new FadeOutTransition(Color.black, 500), new FadeInTransition(Color.black, 500));
 			gc.setMouseGrabbed(false);
 		}
 		if(Game.input.isKeyPressed(1))
 		{
-			sbg.enterState(States.STARTSCREEN);
+			sbg.enterState(States.STARTSCREEN, new FadeOutTransition(Color.black, 500), new FadeInTransition(Color.black, 500));
 			gc.setMouseGrabbed(false);
 		}
 	}

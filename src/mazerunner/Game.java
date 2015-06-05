@@ -11,6 +11,8 @@ import mazerunner.StartScreen;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 public class Game extends StateBasedGame
 {
@@ -64,7 +66,7 @@ public class Game extends StateBasedGame
 		gc.setAlwaysRender(true);
 		gc.setVSync(true);
 		gc.getGraphics().setAntiAlias(true);
-		gc.setShowFPS(false);
+		gc.setShowFPS(true);
 		gameFont=gc.getGraphics().getFont();
 		gc.setUpdateOnlyWhenVisible(false);
 		debug=false;
@@ -72,7 +74,7 @@ public class Game extends StateBasedGame
 		getState(States.LEVEL).init(gc, this);
 		getState(States.GAMEOVER).init(gc, this);
 		getState(States.SCORESCREEN).init(gc, this);
-		enterState(States.STARTSCREEN);
+		enterState(States.STARTSCREEN, new FadeInTransition(Color.black, 500), null);
 		input = gc.getInput();	
 	}	
 

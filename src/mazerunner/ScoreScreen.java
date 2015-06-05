@@ -11,6 +11,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
 public class ScoreScreen extends BasicGameState
@@ -102,7 +103,7 @@ public class ScoreScreen extends BasicGameState
 		if(Game.input.isKeyPressed(Input.KEY_ESCAPE))
 		{
 
-			sbg.enterState(0, new FadeOutTransition(Color.black, 1500), null);
+			sbg.enterState(0, new FadeOutTransition(Color.black, 500), new FadeInTransition(Color.black, 500));
 		}
 		if(Game.input.isKeyPressed(Input.KEY_LEFT))
 		{

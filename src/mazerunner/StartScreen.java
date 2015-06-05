@@ -9,6 +9,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 public class StartScreen extends BasicGameState
 {
@@ -59,14 +61,14 @@ public class StartScreen extends BasicGameState
 				Game.gameType = 2; 
 			else if(playerChoice.intersects(maze)) 
 				Game.gameType = 3; 
-			sbg.enterState(States.LEVEL); 
+			sbg.enterState(States.LEVEL, new FadeOutTransition(Color.black, 500), null); 
 		} 
 		if(Game.input.isMousePressed(2)) 
 			Game.debug = !Game.debug; 
 		if(Game.input.isKeyPressed(1)) 
 			gc.exit();
 		if(Game.input.isKeyPressed(Input.KEY_S)) 
-			sbg.enterState(States.SCORESCREEN);
+			sbg.enterState(States.SCORESCREEN, new FadeOutTransition(Color.black,500), new FadeInTransition(Color.black, 500));
 	}
 	public int getID()
 	{
