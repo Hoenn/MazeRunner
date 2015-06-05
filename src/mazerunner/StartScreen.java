@@ -5,6 +5,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
@@ -37,7 +38,9 @@ public class StartScreen extends BasicGameState
 	}
 	public void enter(GameContainer gc, StateBasedGame sbg)
 	{
-		Resources.getMusic("titleScreen").loop();
+		Music m = Resources.getMusic("titleScreen");
+		if(!m.playing())
+			m.loop();
 	}
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException
 	{
@@ -71,8 +74,7 @@ public class StartScreen extends BasicGameState
 			else if(playerChoice.intersects(maze)) 
 				startGame(3, sbg);
 			else if(playerChoice.intersects(settings))
-				System.out.println("bugb");
-				//sbg.enterState(States.SETTINGS, new FadeOutTransition(Color.black, 500), null);
+				sbg.enterState(States.SETTINGS, new FadeOutTransition(Color.black, 500), null);
 			else if(playerChoice.intersects(scores))
 				sbg.enterState(States.SCORESCREEN, new FadeOutTransition(Color.black, 500), new FadeInTransition(Color.black, 500));
 			

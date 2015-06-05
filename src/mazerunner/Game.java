@@ -33,6 +33,7 @@ public class Game extends StateBasedGame
 		addState(new Level(States.LEVEL));
 		addState(new GameOver(States.GAMEOVER));
 		addState(new ScoreScreen(States.SCORESCREEN));
+		addState(new Settings(States.SETTINGS));
 	}
 	public static void main(String[] args)
 	{
@@ -74,6 +75,7 @@ public class Game extends StateBasedGame
 		getState(States.LEVEL).init(gc, this);
 		getState(States.GAMEOVER).init(gc, this);
 		getState(States.SCORESCREEN).init(gc, this);
+		getState(States.SETTINGS).init(gc, this);
 		enterState(States.STARTSCREEN, new FadeInTransition(Color.black, 500), null);
 		input = gc.getInput();	
 	}	
