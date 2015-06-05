@@ -19,6 +19,8 @@ public class StartScreen extends BasicGameState
 	private Rectangle zen;
 	private Rectangle maze;
 	private Rectangle playerChoice;
+	private Rectangle settings;
+	private Rectangle scores;
 	
 	public StartScreen(int stateID)
 	{
@@ -26,10 +28,12 @@ public class StartScreen extends BasicGameState
 	}
 	public void init(GameContainer gc, StateBasedGame sb) throws SlickException
 	{
-		Game.gameType=3;
-		arcade=new Rectangle(0.0f, 0.0f, 250f, 500f);
-		zen = new Rectangle(250f, 0.0f, 250f, 500f);
-		maze= new Rectangle(500f, 0.0f, 250f, 500f);
+		Game.gameType=1;
+		arcade=new Rectangle(0.0f, 0.0f, 250f, 350f);
+		zen = new Rectangle(250f, 0.0f, 250f, 350f);
+		maze= new Rectangle(500f, 0.0f, 250f, 350f);
+		settings = new Rectangle(0, 350, 375, 150);
+		scores = new Rectangle(375, 350, 375, 150);
 	}
 	public void enter(GameContainer gc, StateBasedGame sbg)
 	{
@@ -43,12 +47,17 @@ public class StartScreen extends BasicGameState
 		g.fill(zen);
 		g.setColor(Resources.colors.get("myGreen"));
 		g.fill(maze);
-		g.setDrawMode(Graphics.MODE_NORMAL);
+		g.setColor(Color.gray);
+		g.fill(settings);
+		g.setColor(Color.white);
+		g.fill(scores);
 
 		g.setColor(Color.black);
-		g.drawString("ARCADE", Tools.centerTextX("ARCADE",  125), 250F); 
-		g.drawString("ZEN", Tools.centerTextX("ZEN", 375), 250F); 
-		g.drawString("MAZE", Tools.centerTextX("MAZE",  625), 250F);
+		g.drawString("ARCADE", Tools.centerTextX("ARCADE",  125), 175); 
+		g.drawString("ZEN", Tools.centerTextX("ZEN", 375), 175); 
+		g.drawString("MAZE", Tools.centerTextX("MAZE",  625), 175);
+		g.drawString("SETTINGS", Tools.centerTextX("SETTINGS", 187), 425);
+		g.drawString("SCORES", Tools.centerTextX("SCORES", 563), 425);
 	}
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException
 	{
@@ -56,12 +65,17 @@ public class StartScreen extends BasicGameState
 		{ 
 			playerChoice = new Rectangle(Game.input.getMouseX(), Game.input.getMouseY(), 1.0F, 1.0F); 
 			if(playerChoice.intersects(arcade)) 
-				Game.gameType = 1; 
+				startGame(1, sbg);
 			else if(playerChoice.intersects(zen)) 
-				Game.gameType = 2; 
+				startGame(2, sbg);
 			else if(playerChoice.intersects(maze)) 
-				Game.gameType = 3; 
-			sbg.enterState(States.LEVEL, new FadeOutTransition(Color.black, 500), null); 
+				startGame(3, sbg);
+			else if(playerChoice.intersects(settings))
+				System.out.println("bugb");
+				//sbg.enterState(States.SETTINGS, new FadeOutTransition(Color.black, 500), null);
+			else if(playerChoice.intersects(scores))
+				sbg.enterState(States.SCORESCREEN, new FadeOutTransition(Color.black, 500), new FadeInTransition(Color.black, 500));
+			
 		} 
 		if(Game.input.isMousePressed(2)) 
 			Game.debug = !Game.debug; 
@@ -69,6 +83,11 @@ public class StartScreen extends BasicGameState
 			gc.exit();
 		if(Game.input.isKeyPressed(Input.KEY_S)) 
 			sbg.enterState(States.SCORESCREEN, new FadeOutTransition(Color.black,500), new FadeInTransition(Color.black, 500));
+	}
+	public void startGame(int gameType, StateBasedGame sbg)
+	{
+		Game.gameType=gameType;
+		sbg.enterState(States.LEVEL, new FadeOutTransition(Color.black, 500), null); 
 	}
 	public int getID()
 	{
