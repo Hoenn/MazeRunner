@@ -74,7 +74,7 @@ public class StartScreen extends BasicGameState
 			else if(playerChoice.intersects(maze)) 
 				startGame(3, sbg);
 			else if(playerChoice.intersects(settings))
-				sbg.enterState(States.SETTINGS, new FadeOutTransition(Color.black, 500), null);
+				sbg.enterState(States.SETTINGS, new FadeOutTransition(Color.black, 500), new FadeInTransition(Color.black, 500));
 			else if(playerChoice.intersects(scores))
 				sbg.enterState(States.SCORESCREEN, new FadeOutTransition(Color.black, 500), new FadeInTransition(Color.black, 500));
 			
