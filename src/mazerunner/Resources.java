@@ -23,6 +23,7 @@ public class Resources
 		images.put("player2", loadImage("res/playerAni_2.png"));
 		images.put("wallbg1", loadImage("res/swordWall.png"));
 		images.put("wallbg2", loadImage("res/swordWall2.png"));
+		images.put("background", loadImage("res/background.png"));
 		sounds.put("hit", loadSound("res/hit.ogg"));
 		sounds.put("scoreUp", loadSound("res/scoreUp.wav"));
 		sounds.put("spawnArcade", loadSound("res/spawn.ogg"));

@@ -15,9 +15,9 @@ public  class HighScoreManager
     private ArrayList<Score> maze_scores;
     private final int max = 10; // Number of scores that will be displayed
 
-    private static final String FileNameLoc_Arcade = "res/Scores_Arcade";
-    private static final String FileNameLoc_Zen = "res/Scores_Zen";
-    private static final String FileNameLoc_Maze = "res/Scores_Maze";
+    private static final String FileNameLoc_Arcade = "res/res/Scores_Arcade";
+    private static final String FileNameLoc_Zen = "res/res/Scores_Zen";
+    private static final String FileNameLoc_Maze = "res/res/Scores_Maze";
 
     ObjectOutputStream outputStream = null;
     ObjectInputStream inputStream = null;

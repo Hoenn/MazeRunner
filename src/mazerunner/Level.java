@@ -56,8 +56,8 @@ public class Level extends BasicGameState
 		wallTimer=0l;
 		mazeSpeedUp=false;
 		backgrounds = new Image[2];
-		backgrounds[0] = new Image("res/background.png");
-		backgrounds[1] = new Image("res/background.png");
+		backgrounds[0] = Resources.getImage("background");
+		backgrounds[1] = Resources.getImage("background");
 	}
 	
 	public void resetArcade()
@@ -231,11 +231,11 @@ public class Level extends BasicGameState
 						Resources.getSound("hit").play();
 						switch(Game.gameType)
 						{
-							case 1:	Game.hsm.addArcadeScore("Hoenn", score);
+							case 1:	Game.hsm.addArcadeScore("You", score);
 									break;
-							case 2: Game.hsm.addZenScore("Hoenn", score);
+							case 2: Game.hsm.addZenScore("You", score);
 									break;
-							case 3: Game.hsm.addMazeScore("Hoenn", score);
+							case 3: Game.hsm.addMazeScore("You", score);
 									break;
 						}
 						lose=true;

@@ -224,7 +224,6 @@ public class Settings extends BasicGameState
 						break;
 			}
 		}
-		
 	}
 
 	@Override
