@@ -1,18 +1,17 @@
 package mazerunner;
-import java.io.File; 
-import java.io.IOException;
+import java.io.File;
 
-import javax.sound.midi.InvalidMidiDataException;
-import javax.sound.midi.MidiUnavailableException;
-
-import mazerunner.GameOver; 
-import mazerunner.Level; 
-import mazerunner.StartScreen; 
-
-import org.newdawn.slick.*;
+import org.newdawn.slick.AppGameContainer;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Font;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Line;
+import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
-import org.newdawn.slick.state.transition.FadeOutTransition;
 
 public class Game extends StateBasedGame
 {
@@ -27,6 +26,7 @@ public class Game extends StateBasedGame
 	public static Input input;
 	public static HighScoreManager hsm;
 	public static Color aimAssistColor;
+	public static Shape aimAssistShape;
 	public static float defaultSoundVol=.5f;
 	public static float defaultMusicVol=.1f;
 	public Game(String name)
@@ -62,6 +62,8 @@ public class Game extends StateBasedGame
 	public void initStatesList(GameContainer gc) throws SlickException
 	{
 		aimAssistColor = new Color(255, 255, 255);
+		//aimAssistShape = new Rectangle(0,0, 2, 2);
+		aimAssistShape = new Line(0, 0, 200, 0);
 
 		new Resources();
 		gc.setMusicVolume(Game.defaultMusicVol);

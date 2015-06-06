@@ -1,9 +1,13 @@
 package mazerunner;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
-import org.newdawn.slick.*;
+import org.newdawn.slick.Animation;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Line;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
@@ -14,27 +18,20 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 public class Level extends BasicGameState
 {
 	private int id;
-	private int playerX;
-	private int playerY;
+	private int playerX ,playerY;
 	private int playerHalfHeight, playerHalfWidth;
 	private Animation playerAni;
 	private Image playerAniSet[];
 	private int aniSpeed[]={100, 100};
-	private Rectangle hurtBox;
-	private Rectangle colliBox;
-	private Rectangle aimAssist;
+	private Rectangle hurtBox, colliBox;
 	private int score;
 	private ArrayList<Wall> wallList;
-	private int basicWallWidth;
-	private int basicWallSpacer;
+	private int basicWallWidth, basicWallSpacer;
 	private long wallTimer;
 	private float wallSpawnTime;
 	private boolean lose;
-	private boolean mButtonLeft;
-	private boolean mButtonRight;
 	private float mazeSpeedTime=0;
 	private boolean mazeSpeedUp;
-	
 	private Image[] backgrounds;
 	private int background1_x=0;
 	private int background2_x=500;
@@ -43,6 +40,7 @@ public class Level extends BasicGameState
 	{
 		id=stateID;
 	}
+	
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException
 	{
 		playerAniSet= new Image[] {Resources.getImage("player1"), Resources.getImage("player2")};
@@ -53,7 +51,6 @@ public class Level extends BasicGameState
 		playerHalfWidth=playerAni.getWidth()/2;
 		hurtBox = new Rectangle((playerX+playerHalfWidth)-12f, (playerY+playerHalfHeight), 24f, 24f);
 		colliBox = new Rectangle((playerX + playerHalfWidth)-15f, (playerY + playerHalfHeight), 30F, 1000F);
-		aimAssist= new Rectangle((playerX+ gc.getWidth()/3), playerY+playerHalfHeight, 2, 2);
 		lose=false;
 		wallList = new ArrayList<Wall>();
 		wallTimer=0l;
@@ -61,9 +58,8 @@ public class Level extends BasicGameState
 		backgrounds = new Image[2];
 		backgrounds[0] = new Image("res/background.png");
 		backgrounds[1] = new Image("res/background.png");
-
-
 	}
+	
 	public void resetArcade()
 	{
 		wallSpawnTime=1500f;
@@ -73,6 +69,7 @@ public class Level extends BasicGameState
 		Resources.getSound("spawnArcade").play();
 		Resources.getMusic("arcade").loop();
 	}
+	
 	public void resetZen()
 	{
 		Wall.moveSpeed=1.0f;
@@ -83,6 +80,7 @@ public class Level extends BasicGameState
 		Resources.getMusic("zen").loop();
 
 	}
+	
 	public void resetMaze()
 	{
 		basicWallSpacer=100;
@@ -95,6 +93,7 @@ public class Level extends BasicGameState
 		Resources.getMusic("maze").loop();
 
 	}
+	
 	public void mazeStartSpeedUp(int delta)
 	{
 		mazeSpeedTime+=delta;
@@ -105,8 +104,8 @@ public class Level extends BasicGameState
 			mazeSpeedTime=0L;
 			mazeSpeedUp=false;
 		}
-
 	}
+	
 	public void speedUp()
 	{
 		if(score%5 ==0 && Wall.moveSpeed <1.0f)
@@ -119,6 +118,7 @@ public class Level extends BasicGameState
 			basicWallSpacer--;
 		}
 	}
+	
 	public void enter(GameContainer gc, StateBasedGame sbg)
 	{
 		background1_x=0;
@@ -147,7 +147,16 @@ public class Level extends BasicGameState
 			gc.setMouseGrabbed(false);
 			gc.setShowFPS(false);
 		}
+		if(Game.aimAssistShape instanceof Rectangle)
+		{
+			Game.aimAssistShape.setX(playerX+ gc.getWidth()/3);
+		}
+		if(Game.aimAssistShape instanceof Line)
+		{
+			Game.aimAssistShape.setX(playerX+playerAni.getWidth()+5);
+		}
 	}
+	
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException
 	{
 		backgrounds[0].draw(background1_x, 0);
@@ -162,18 +171,18 @@ public class Level extends BasicGameState
 		}
 		g.drawAnimation(playerAni, playerX, playerY);//playerAni.draw(playerX, playerY);
 		g.setColor(Game.aimAssistColor);
-		g.fill(aimAssist);
+		g.draw(Game.aimAssistShape);
 		g.setColor(Color.white);
-		g.drawString(Integer.toString(score), Tools.centerTextX(Integer.toString(score), 375), 62f);
 
+		g.drawString(Integer.toString(score), Tools.centerTextX(Integer.toString(score), 375), 62f);
 		if(Game.debug)
 		{
 			g.draw(colliBox);
 			g.setColor(Color.red);
 			g.draw(hurtBox);
 		}
-
 	}
+	
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException
 	{
 		if(background1_x>-750)
@@ -238,9 +247,8 @@ public class Level extends BasicGameState
 			if(w.isRemovable())
 				wallList.remove(i);
 		}
-		mButtonLeft=Game.input.isMouseButtonDown(0);
-		mButtonRight=Game.input.isMouseButtonDown(1);
-		if(mButtonLeft || mButtonRight)
+		
+		if(Game.input.isMouseButtonDown(0)|| Game.input.isMouseButtonDown(1))
 		{
 
 			updatePlayerPos();
@@ -264,23 +272,27 @@ public class Level extends BasicGameState
 			gc.setMouseGrabbed(false);
 		}
 	}
+	
 	public void updatePlayerPos()
 	{
 		playerY=Game.input.getMouseY()-playerHalfHeight;
 	}
+	
 	public void updateBoxes()
 	{
 		float height= playerY+playerAni.getHeight()/2;
 		hurtBox.setY(height - hurtBox.getHeight() / 2.0F); 
 		colliBox.setY(height- colliBox.getHeight() / 2.0F);
-		aimAssist.setY(height);
+		Game.aimAssistShape.setY(height);
 	}
+	
 	public void addScore()
 	{
 		score++;
 		Resources.getSound("scoreUp").play();
 		speedUp();
 	}
+	
 	public int getID()
 	{
 		return id;
