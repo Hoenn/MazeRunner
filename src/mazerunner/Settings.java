@@ -26,23 +26,20 @@ public class Settings extends BasicGameState
 	private Rectangle volumeUp;
 	private Rectangle volumeDown;
 	private Rectangle mute;
-	
-	private Rectangle rValueUp;
-	private Rectangle rValueDown;
+
 	private TextField rValueInput;
 	private int newRValue;
-	
-	private Rectangle bValueUp;
-	private Rectangle bValueDown;
+
 	private TextField bValueInput;
 	private int newBValue;
 	
-	private Rectangle gValueUp;
-	private Rectangle gValueDown;
 	private TextField gValueInput;
 	private int newGValue;
 	
 	private int currentRGB;
+	
+	private Rectangle choiceLine;
+	private Rectangle choiceDot;
 	
 	private Rectangle colorPreview;
 	public Settings(int stateID)
@@ -57,9 +54,7 @@ public class Settings extends BasicGameState
 		volumeDown = new Rectangle(283, 0, 183, 100);
 		volumeUp= new Rectangle(466, 0, 183, 100);
 		
-		rValueUp = new Rectangle(150,125,150,100);
 		rValueInput = new TextField(gc, Game.gameFont, 300, 150, 150, 50);
-		rValueDown = new Rectangle(450,125,150,100);
 		rValueInput.setAcceptingInput(true);
 		rValueInput.setMaxLength(3);
 		rValueInput.setBackgroundColor(Color.white);
@@ -67,9 +62,7 @@ public class Settings extends BasicGameState
         rValueInput.setTextColor(Color.black);
         newRValue=Game.aimAssistColor.getRed();
 			
-		bValueUp = new Rectangle(150,225,150,100);
 		bValueInput = new TextField(gc, Game.gameFont, 300, 250, 150, 50);
-		bValueDown = new Rectangle(450,225,150,100);
 		bValueInput.setAcceptingInput(true);
 		bValueInput.setMaxLength(3);
 		bValueInput.setBackgroundColor(Color.white);
@@ -77,9 +70,7 @@ public class Settings extends BasicGameState
         bValueInput.setTextColor(Color.black);
         newBValue=Game.aimAssistColor.getBlue();
 		
-		gValueUp = new Rectangle(150,325,150,100);
 		gValueInput = new TextField(gc, Game.gameFont, 300, 350, 150, 50);
-		gValueDown = new Rectangle(450,325,150,100);
 		gValueInput.setAcceptingInput(true);
 		gValueInput.setMaxLength(3);
 		gValueInput.setBackgroundColor(Color.white);
@@ -87,7 +78,11 @@ public class Settings extends BasicGameState
         gValueInput.setTextColor(Color.black);
         newGValue=Game.aimAssistColor.getGreen();
         
+        choiceLine = new Rectangle(0, 425, 100, 75);
+        choiceDot = new Rectangle(650, 425, 100, 75);
+        
         colorPreview = new Rectangle(150, 450, 450, 50);
+        
 	}
 	public void enter(GameContainer gc, StateBasedGame sbg)
 	{
@@ -125,22 +120,20 @@ public class Settings extends BasicGameState
 		
 		
 		g.setColor(Color.red);
-		g.fill(rValueUp);
 		rValueInput.render(gc, g);
-		g.fill(rValueDown);
 		g.setColor(Color.blue);
-		g.fill(bValueUp);
 		bValueInput.render(gc, g);
-		g.fill(bValueDown);
 		g.setColor(Color.green);
-		g.fill(gValueUp);
 		gValueInput.render(gc, g);
-		g.fill(gValueDown);
 		
 		g.setColor(Game.aimAssistColor);
 		g.fill(colorPreview);
 
-
+		g.setColor(Color.white);
+		g.draw(choiceDot);
+		g.draw(choiceLine);
+		g.drawString("Line", Tools.centerTextX("Line", 50), 440);
+		g.drawString("Dot", Tools.centerTextX("Dot", 700), 440);
 	}
 
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
@@ -173,6 +166,14 @@ public class Settings extends BasicGameState
 				gc.setMusicVolume(gc.getMusicVolume()+.01f);
 				gc.setSoundVolume(gc.getSoundVolume()+.03f);
 				Resources.getSound("scoreUp").play();
+			}
+			if(playerChoice.intersects(choiceLine))
+			{
+				Game.setAimAssistLine();
+			}
+			if(playerChoice.intersects(choiceDot))
+			{
+				Game.setAimAssistDot();
 			}
 		}
 

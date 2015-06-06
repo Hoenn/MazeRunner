@@ -62,9 +62,7 @@ public class Game extends StateBasedGame
 	public void initStatesList(GameContainer gc) throws SlickException
 	{
 		aimAssistColor = new Color(255, 255, 255);
-		//aimAssistShape = new Rectangle(0,0, 2, 2);
-		aimAssistShape = new Line(0, 0, 200, 0);
-
+		setAimAssistDot();
 		new Resources();
 		gc.setMusicVolume(Game.defaultMusicVol);
 		gc.setSoundVolume(Game.defaultSoundVol);
@@ -85,5 +83,14 @@ public class Game extends StateBasedGame
 		enterState(States.STARTSCREEN, new FadeInTransition(Color.black, 500), null);
 		input = gc.getInput();	
 	}	
+	public static void setAimAssistLine()
+	{
+		aimAssistShape = new Line(0, 0, 200, 0);
+
+	}
+	public static void setAimAssistDot()
+	{
+		aimAssistShape = new Rectangle(0,0, 2, 2);
+	}
 
 }

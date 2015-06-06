@@ -171,7 +171,11 @@ public class Level extends BasicGameState
 		}
 		g.drawAnimation(playerAni, playerX, playerY);//playerAni.draw(playerX, playerY);
 		g.setColor(Game.aimAssistColor);
-		g.draw(Game.aimAssistShape);
+		if(Game.aimAssistShape instanceof Line)
+			g.draw(Game.aimAssistShape);
+		else
+			g.fill(Game.aimAssistShape);
+		
 		g.setColor(Color.white);
 
 		g.drawString(Integer.toString(score), Tools.centerTextX(Integer.toString(score), 375), 62f);
