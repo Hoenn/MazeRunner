@@ -5,6 +5,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -21,6 +22,10 @@ public class ScoreScreen extends BasicGameState
 	private String highScores_Maze;
 	private String dates_Maze;
 	
+	private Rectangle playerChoice;
+	private Rectangle backButton;
+
+	
 	private int currentPage;
 	
 	public ScoreScreen(int state)
@@ -31,9 +36,8 @@ public class ScoreScreen extends BasicGameState
 	public void init(GameContainer arg0, StateBasedGame arg1)
 			throws SlickException
 	{
-
+        backButton = new Rectangle(0, 0, 100, 100);
 	}
-	
 
 	public void enter(GameContainer gc, StateBasedGame sbg) throws SlickException
 	{
@@ -51,6 +55,8 @@ public class ScoreScreen extends BasicGameState
 			throws SlickException
 	{
 		g.setColor(Color.white);
+		g.draw(backButton);
+		g.drawString("Back", Tools.centerTextX("Back", 50), 40);
  
 		if(currentPage==0)
 		{
@@ -83,6 +89,14 @@ public class ScoreScreen extends BasicGameState
 		{
 
 			sbg.enterState(0, new FadeOutTransition(Color.black, 500), new FadeInTransition(Color.black, 500));
+		}
+		if(Game.input.isMousePressed(0)||Game.input.isMousePressed(1))
+		{
+			playerChoice = new Rectangle(Game.input.getMouseX(), Game.input.getMouseY(), 1.0F, 1.0F);
+			if(playerChoice.intersects(backButton))
+			{
+				sbg.enterState(0, new FadeOutTransition(Color.black, 500), new FadeInTransition(Color.black, 500));
+			}
 		}
 		if(Game.input.isKeyPressed(Input.KEY_LEFT))
 		{

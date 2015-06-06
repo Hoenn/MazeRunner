@@ -41,6 +41,8 @@ public class Settings extends BasicGameState
 	private Rectangle choiceLine;
 	private Rectangle choiceDot;
 	
+	private Rectangle backButton;
+	
 	private Rectangle colorPreview;
 	public Settings(int stateID)
 	{
@@ -81,6 +83,8 @@ public class Settings extends BasicGameState
         choiceLine = new Rectangle(0, 425, 100, 75);
         choiceDot = new Rectangle(650, 425, 100, 75);
         
+        backButton = new Rectangle(0, 0, 100, 100);
+        
         colorPreview = new Rectangle(150, 450, 450, 50);
         
 	}
@@ -114,9 +118,9 @@ public class Settings extends BasicGameState
 		g.fill(volumeUp);
 		
 		g.setColor(Color.black);
-		g.drawString("Mute", Tools.centerTextX("Mute", 192), 50);
-		g.drawString(" - ", Tools.centerTextX(" - ", 375), 50);
-		g.drawString(" + ", Tools.centerTextX(" + ", 558), 50);
+		g.drawString("Mute", Tools.centerTextX("Mute", 192), 40);
+		g.drawString(" - ", Tools.centerTextX(" - ", 375), 40);
+		g.drawString(" + ", Tools.centerTextX(" + ", 558), 40);
 		
 		
 		g.setColor(Color.red);
@@ -130,6 +134,8 @@ public class Settings extends BasicGameState
 		g.fill(colorPreview);
 
 		g.setColor(Color.white);
+		g.draw(backButton);
+		g.drawString("Back", Tools.centerTextX("Back", 50), 40);
 		g.draw(choiceDot);
 		g.draw(choiceLine);
 		g.drawString("Line", Tools.centerTextX("Line", 50), 440);
@@ -166,6 +172,10 @@ public class Settings extends BasicGameState
 				gc.setMusicVolume(gc.getMusicVolume()+.01f);
 				gc.setSoundVolume(gc.getSoundVolume()+.03f);
 				Resources.getSound("scoreUp").play();
+			}
+			if(playerChoice.intersects(backButton))
+			{
+				sbg.enterState(0, new FadeOutTransition(Color.black, 500), new FadeInTransition(Color.black, 500));
 			}
 			if(playerChoice.intersects(choiceLine))
 			{
