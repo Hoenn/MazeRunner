@@ -60,39 +60,28 @@ public class ScoreScreen extends BasicGameState
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException
 	{
-		g.setColor(new Color(0, 0, 0, 0.8f));
-		g.setFont(trueTypeFont);
 		g.setColor(Color.white);
  
 		if(currentPage==0)
 		{
-			g.drawString("HighScores: Arcade", gc.getWidth() / 2.7f, 50);
-			g.resetFont();
-			g.setColor(new Color(0, 0, 0, 0.5f));
-			g.fillRect(gc.getWidth() / 4.1f, gc.getHeight() / 4.2f, 400, 220);
+			g.drawString("HighScores: Arcade", Tools.centerTextX("HighScores: Arcade", gc.getWidth()/2), 50);
 			g.setColor(Color.white);
-			g.drawString(highScores_Arcade, gc.getWidth() / 3.9f, gc.getHeight() / 4f);
-			g.drawString(dates_Arcade, gc.getWidth() /  1.9f, gc.getHeight() / 4f);
+			g.drawString(highScores_Arcade, gc.getWidth() / 3.5f, gc.getHeight() / 4f);
+			g.drawString(dates_Arcade, gc.getWidth() /  2f, gc.getHeight() / 4f);
 		}
 		else if(currentPage==1)
 		{
-			g.drawString("HighScores: Zen", gc.getWidth() / 2.7f, 50);
-			g.resetFont();
-			g.setColor(new Color(0, 0, 0, 0.5f));
-			g.fillRect(gc.getWidth() / 4.1f, gc.getHeight() / 4.2f, 400, 220);
+			g.drawString("HighScores: Zen", Tools.centerTextX("HighScores: Zen", gc.getWidth()/2), 50);
 			g.setColor(Color.white);
-			g.drawString(highScores_Zen, gc.getWidth() / 3.9f, gc.getHeight() / 4f);
-			g.drawString(dates_Zen, gc.getWidth() /  1.9f, gc.getHeight() / 4f);
+			g.drawString(highScores_Zen, gc.getWidth() / 3.5f, gc.getHeight() / 4f);
+			g.drawString(dates_Zen, gc.getWidth() /  2f, gc.getHeight() / 4f);
 		}
 		else if(currentPage==2)
 		{
-			g.drawString("HighScores: Maze", gc.getWidth() / 2.7f, 50);
-			g.resetFont();
-			g.setColor(new Color(0, 0, 0, 0.5f));
-			g.fillRect(gc.getWidth() / 4.1f, gc.getHeight() / 4.2f, 400, 220);
+			g.drawString("HighScores: Maze", Tools.centerTextX("HighScores: Maze", gc.getWidth()/2), 50);
 			g.setColor(Color.white);
-			g.drawString(highScores_Maze, gc.getWidth() / 3.9f, gc.getHeight() / 4f);
-			g.drawString(dates_Maze, gc.getWidth() /  1.9f, gc.getHeight() / 4f);
+			g.drawString(highScores_Maze, gc.getWidth() / 3.5f, gc.getHeight() / 4f);
+			g.drawString(dates_Maze, gc.getWidth() /  2f, gc.getHeight() / 4f);
 		}
 	}
 
