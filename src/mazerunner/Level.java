@@ -258,9 +258,17 @@ public class Level extends BasicGameState
 			updatePlayerPos();
 			updateBoxes();
 		}
-		else if(!Game.debug  )
+		else if(!Game.debug )
 		{
 			lose=true;
+			switch(Game.gameType){
+				case 1:	Game.hsm.addArcadeScore("You", score);
+				break;
+		case 2: Game.hsm.addZenScore("You", score);
+				break;
+		case 3: Game.hsm.addMazeScore("You", score);
+				break;
+			}
 		}
 		if(lose)
 		{
