@@ -18,7 +18,6 @@ public class GameOver extends BasicGameState
 	private Color noColor;
 	
 	private String contMsg="Continue?";
-	private String dirMsg="Hold both mouse buttons to select";
 	
 	public GameOver(int stateId)
 	{
@@ -44,7 +43,6 @@ public class GameOver extends BasicGameState
 		g.fill(choiceNo);
 		g.setColor(Color.black);
 		g.drawString(contMsg, Tools.centerTextX(contMsg, 375), 100F);
-		g.drawString(dirMsg, Tools.centerTextX(dirMsg, 375), 125F);
 		g.drawString("Yes", Tools.centerTextX("Yes", 187), 250F);
 		g.drawString("No", Tools.centerTextX("No", 187) +375 , 250F);
 	}
