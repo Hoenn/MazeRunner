@@ -213,19 +213,31 @@ public class Settings extends BasicGameState
 		{
 			switch(currentRGB)
 			{
-				case 0: Game.aimAssistColor.r=Float.parseFloat(rValueInput.getText())/255;
-						newRValue=Game.aimAssistColor.getRed();
+				case 0: if(isNumeric(rValueInput.getText()))
+						{
+							Game.aimAssistColor.r=Float.parseFloat(rValueInput.getText())/255;
+							newRValue=Game.aimAssistColor.getRed();
+						}
 						break;
-				case 1: Game.aimAssistColor.b=Float.parseFloat(bValueInput.getText())/255;
-						newBValue=Game.aimAssistColor.getBlue();
+				case 1: if(isNumeric(rValueInput.getText()))
+						{
+							Game.aimAssistColor.b=Float.parseFloat(bValueInput.getText())/255;
+							newBValue=Game.aimAssistColor.getBlue();
+						}
 						break;
-				case 2: Game.aimAssistColor.g=Float.parseFloat(gValueInput.getText())/255;
-						newGValue=Game.aimAssistColor.getGreen();
+				case 2: if(isNumeric(rValueInput.getText()))
+						{
+							Game.aimAssistColor.g=Float.parseFloat(gValueInput.getText())/255;
+							newGValue=Game.aimAssistColor.getGreen();
+						}
 						break;
 			}
 		}
 	}
-
+	private boolean isNumeric(String str)
+	{
+		  return str.matches("\\d+(\\.\\d+)?");  
+	}
 	@Override
 	public int getID()
 	{
