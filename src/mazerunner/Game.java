@@ -63,7 +63,7 @@ public class Game extends StateBasedGame
 	{
 		aimAssistColor = new Color(255, 255, 255);
 		setAimAssistDot();
-		new Resources();
+		new Resources(); //Initialize Resources first
 		gc.setMusicVolume(Game.defaultMusicVol);
 		gc.setSoundVolume(Game.defaultSoundVol);
 		gc.setMaximumLogicUpdateInterval(60);
@@ -71,7 +71,7 @@ public class Game extends StateBasedGame
 		gc.setAlwaysRender(true);
 		gc.setVSync(true);
 		gc.getGraphics().setAntiAlias(true);
-		gc.setShowFPS(true);
+		gc.setShowFPS(true); 
 		gameFont=gc.getGraphics().getFont();
 		gc.setUpdateOnlyWhenVisible(false);
 		debug=false;
